@@ -1,0 +1,3 @@
+# Install only versions published at least 3 days ago (matches Dependabot, and keeps
+# brand-new and possibly compromised releases out of the lockfile).
+minimumReleaseAge: 4320
