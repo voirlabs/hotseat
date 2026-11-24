@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+/* Voir Labs theme (matches voirlabs.io). Dark only. */
+@theme inline {
+  --font-sans: var(--font-urbanist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+@theme {
+  --font-serif: Georgia, "Times New Roman", serif;
+
+  --color-bg: #080809;
+  --color-surface: #0f0e11;
+  --color-surface-2: #131016;
+  --color-card: #17141d;
+  --color-line: #27252b;
+  --color-line-2: #37313d;
+  /* Three text roles: primary, secondary, muted. */
+  --color-ink: #f3f1ed;
+  --color-muted: #b3acbc;
+  --color-faint: #8f8799;
+  --color-accent: #d0a2ff;
+  /* A tinted surface and its border, for your own chat messages and the selection. */
+  --color-accent-strong: #2a1f3a;
+  --color-accent-border: #46345f;
+  --color-danger: #ff8a9b;
+  --color-success: #8fe3b5;
+  --color-warning: #f5c97a;
+
+  /* One easing curve and one short duration for every hover and press. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 160ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background: #bea1e7;
+    color: var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* lucide icons: one stroke everywhere. */
+  svg.lucide {
+    stroke-width: 1.75px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* Serif display headline, used sparingly (page titles, empty states). */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--color-ink);
+  }
+  /* The accent word in a headline: colour only, upright. */
+  .display em {
+    font-style: normal;
+    color: var(--color-accent);
+  }
+
+  /* Small section label, sentence case. */
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: var(--color-faint);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: nowrap;
+    transition:
+      background-color 160ms var(--ease-out),
+      border-color 160ms var(--ease-out),
+      color 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
+  }
+  .btn:not(:disabled):active {
+    transform: scale(0.98);
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+  .btn-primary {
+    background: #f2f0ed;
+    border-color: #f2f0ed;
+    color: #151417;
+  }
+  .btn-primary:not(:disabled):hover {
+    background: #d6c3ef;
+    border-color: #d6c3ef;
+  }
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--color-line-2);
+    color: var(--color-ink);
+  }
+  .btn-secondary:not(:disabled):hover {
+    background: var(--color-card);
+  }
+  .btn-danger {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--color-danger) 60%, transparent);
+    color: var(--color-danger);
+  }
+  .btn-danger:not(:disabled):hover {
+    background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+  }
+
+  .field {
+    width: 100%;
+    background: #121016;
+    border: 1px solid var(--color-line-2);
+    border-radius: 10px;
+    color: var(--color-ink);
+    font-size: 15px;
+    transition: border-color 160ms var(--ease-out);
+  }
+  .field::placeholder {
+    color: var(--color-faint);
+  }
+  .field:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 0;
+    border-color: transparent;
+  }
+  .field:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+  }
+}
+
+@utility thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-2) transparent;
+}
+
+/* The one live signal: the persona's avatar brightens while it speaks. */
+@keyframes speaking {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@utility speaking {
+  animation: speaking 600ms var(--ease-out) infinite alternate;
+}
+
+/* Typing dots: a soft fade, staggered by the caller. */
+@keyframes typing {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility typing-dot {
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

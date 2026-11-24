@@ -1,0 +1,21 @@
+name: New persona
+description: Propose a new persona
+labels: [persona]
+body:
+  - type: markdown
+    attributes:
+      value: Personas must be fictional. Don't base them on real, identifiable people.
+  - type: input
+    id: who
+    attributes:
+      label: Who are they?
+      placeholder: COO of a regional clinic group, choosing an agency to build their patient app
+    validations:
+      required: true
+  - type: textarea
+    id: style
+    attributes:
+      label: Style and focus
+      description: How do they talk, what do they always push on, what makes them pass?
+    validations:
+      required: true

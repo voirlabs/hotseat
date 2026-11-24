@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- Source for the PNG icons: ?size=180&pad=24&bg=1 is the apple-touch-icon (app/apple-icon.png,
+     site/apple-touch-icon.png) and ?size=32 the favicon PNG (site/favicon-32.png, and inside
+     app/favicon.ico). From the repo root:
+     google-chrome --headless=new --hide-scrollbars --default-background-color=00000000 \
+       --window-size=180,180 --screenshot="$PWD/app/apple-icon.png" "file://$PWD/docs/brand/icon.html?size=180&pad=24&bg=1" -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  div { display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+  img { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+  <div id="box"><img src="../../public/logo.svg" alt=""></div>
+  <script>
+    const q = new URLSearchParams(location.search);
+    const size = Number(q.get("size") || 32), pad = Number(q.get("pad") || 0);
+    const box = document.getElementById("box");
+    box.style.width = box.style.height = size + "px";
+    box.style.padding = pad + "px";
+    if (q.get("bg")) box.style.background = "#080809";
+  </script>
+</body>
+</html>

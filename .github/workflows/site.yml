@@ -1,0 +1,33 @@
+name: Landing page
+
+# Deploys site/ to Firebase Hosting (hotseat.voirlabs.io). Runs only on the
+# upstream repository, never on forks, and only when site/ changes.
+on:
+  push:
+    branches: [main]
+    paths: ['site/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Manual runs deploy from main only.
+    if: github.repository == 'voirlabs/hotseat' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_OPEN_SOURCE }}
+          projectId: open-source-65128
+          entryPoint: site
+          channelId: live

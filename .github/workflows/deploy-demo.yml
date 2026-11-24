@@ -1,0 +1,77 @@
+name: Deploy demo
+
+# Redeploys the Voir Labs demo (repository variable DEMO_URL) after CI passes on main,
+# or on demand from main.
+# Runs only in the voirlabs repository; forks skip it. The SSH key in secrets can
+# only replace this app's files and restart it on the demo server (a forced
+# command there).
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.repository == 'voirlabs/hotseat' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_APP_URL: ${{ vars.DEMO_URL }}
+      NEXT_TELEMETRY_DISABLED: "1"
+      DEMO_SSH_TARGET: ${{ secrets.DEMO_SSH_TARGET }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build a standalone bundle
+        run: |
+          # Standalone output is turned on for this build only.
+          python3 - <<'PY'
+          p, anchor = "next.config.ts", "const nextConfig: NextConfig = {"
+          s = open(p).read()
+          assert s.count(anchor) == 1, "next.config anchor not found"
+          open(p, "w").write(s.replace(anchor, anchor + '\n  output: "standalone",'))
+          PY
+          pnpm build
+          mkdir -p out/.next
+          cp -a ./.next/standalone/. out/
+          cp -a ./.next/static out/.next/static
+          if [ -d ./public ]; then cp -a ./public out/; fi
+
+      - name: Set up SSH
+        env:
+          DEMO_SSH_KEY: ${{ secrets.DEMO_SSH_KEY }}
+          DEMO_KNOWN_HOSTS: ${{ secrets.DEMO_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEMO_SSH_KEY" > ~/.ssh/demo
+          chmod 600 ~/.ssh/demo
+          printf '%s\n' "$DEMO_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf 'Host *\n  IdentitiesOnly yes\n  BatchMode yes\n' > ~/.ssh/config
+
+      - name: Upload
+        run: rsync -az --delete -e "ssh -i ~/.ssh/demo" out/ "$DEMO_SSH_TARGET:"
+
+      - name: Restart and wait until it answers
+        run: ssh -i ~/.ssh/demo "$DEMO_SSH_TARGET" restart

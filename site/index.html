@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hotseat · AI pitch practice and sales call roleplay</title>
+  <meta name="description" content="Practice your investor pitch and sales calls out loud with AI personas who push back, then get a scorecard on what to fix. Open source by Voir Labs.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://hotseat.voirlabs.io/">
+  <meta name="theme-color" content="#080809">
+  <meta property="og:site_name" content="Hotseat">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hotseat.voirlabs.io/">
+  <meta property="og:title" content="Hotseat · AI pitch practice and sales call roleplay">
+  <meta property="og:description" content="Talk out loud to AI investors and buyers who push back, then get a scorecard on what to fix. Open source and self-hosted.">
+  <meta property="og:image" content="https://hotseat.voirlabs.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hotseat logo with the headline “Get grilled before it counts.” and a small “by Voir Labs”">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@voir_labs">
+  <meta name="twitter:title" content="Hotseat · AI pitch practice and sales call roleplay">
+  <meta name="twitter:description" content="Talk out loud to AI investors and buyers who push back, then get a scorecard on what to fix. Open source and self-hosted.">
+  <meta name="twitter:image" content="https://hotseat.voirlabs.io/og.png">
+  <meta name="twitter:image:alt" content="Hotseat logo with the headline “Get grilled before it counts.” and a small “by Voir Labs”">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .shot { margin: 64px 0 0; }
+    .shot img { width: 100%; height: auto; border: 1px solid var(--line-2); border-radius: 12px; }
+    .shot figcaption { margin-top: 16px; font-size: 13px; color: var(--faint); text-align: center; }
+    /* The live call's status in the mock: one steady dot, like the app. */
+    .score b small { font-size: inherit; color: var(--faint); }
+    .chip .live { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #8fe3b5; margin: 0 8px 1px 0; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://hotseat.voirlabs.io/#software",
+        "name": "Hotseat",
+        "description": "Open-source AI pitch practice. Rehearse investor pitches and sales calls out loud against AI personas who push back, then get a scorecard on what to fix.",
+        "url": "https://hotseat.voirlabs.io/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "license": "https://opensource.org/licenses/MIT",
+        "codeRepository": "https://github.com/voirlabs/hotseat",
+        "sameAs": ["https://github.com/voirlabs/hotseat"],
+        "image": "https://hotseat.voirlabs.io/og.png",
+        "screenshot": "https://hotseat.voirlabs.io/assets/screenshot-room.jpg",
+        "featureList": ["Live voice calls with interruptions", "Investor and client personas", "Scorecard after every call", "Markdown export", "Self-hosted with one OpenAI key"],
+        "author": { "@id": "https://www.voirlabs.io/#organization" },
+        "publisher": { "@id": "https://www.voirlabs.io/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.voirlabs.io/#organization",
+        "name": "Voir Labs",
+        "url": "https://www.voirlabs.io/"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://hotseat.voirlabs.io/#website",
+        "name": "Hotseat",
+        "url": "https://hotseat.voirlabs.io/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://www.voirlabs.io/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://hotseat.voirlabs.io/#webpage",
+        "url": "https://hotseat.voirlabs.io/",
+        "name": "Hotseat · AI pitch practice and sales call roleplay",
+        "description": "Practice your investor pitch and sales calls out loud with AI personas who push back, then get a scorecard on what to fix. Open source by Voir Labs.",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://hotseat.voirlabs.io/#website" },
+        "about": { "@id": "https://hotseat.voirlabs.io/#software" },
+        "primaryImageOfPage": "https://hotseat.voirlabs.io/og.png",
+        "publisher": { "@id": "https://www.voirlabs.io/#organization" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Hotseat home"><img src="assets/logo.svg" alt="" width="30" height="30">hotseat</a>
+      <nav class="nav" aria-label="Main">
+        <a class="hide-sm" href="#features">Features</a>
+        <a class="hide-sm" href="#how">How it works</a>
+        <a class="hide-sm" href="#self-host">Self-host</a>
+        <a href="https://github.com/voirlabs/hotseat">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dot"></span>Open source · MIT · Voice practice</p>
+            <h1>Get grilled<br>before it <em>counts.</em></h1>
+            <p class="lede">Practice your investor pitch or sales call out loud with AI investors and buyers who push back and ask the hard question. Hang up for a scorecard on what landed and what to fix.</p>
+            <div class="ctas">
+              <a class="btn" href="https://github.com/voirlabs/hotseat#quickstart">Get started</a>
+              <a class="btn ghost" href="https://demo.hotseat.voirlabs.io/">Live demo</a>
+            </div>
+            <p class="note">One OpenAI key. No database.</p>
+          </div>
+          <figure class="hero-art"><img src="assets/hero.webp" alt="A paper-cut armchair with a teal flame on its seat cushion" width="880" height="880" fetchpriority="high"></figure>
+        </div>
+
+        <div class="frame" role="img" aria-label="A practice call with Morgan Hale, a seed-stage partner, followed by a scorecard">
+          <div class="frame-bar"><span>Morgan Hale, partner at a seed fund · tough</span></div>
+          <div class="frame-body mock-cols">
+            <div class="mock">
+              <div class="label">Live call</div>
+              <div class="bubble"><small>Morgan</small>You said 40% month-over-month. On what base, and for how many months?</div>
+              <div class="bubble me"><small>You</small>Three months, from twelve paying teams to thirty-four.</div>
+              <div class="bubble"><small>Morgan</small>So it's early. What happens when your design partners stop being friends?</div>
+              <span class="chip"><span class="live" aria-hidden="true"></span>Hearing you…</span>
+            </div>
+            <div class="mock">
+              <div class="label">Scorecard</div>
+              <div class="score">
+                <div><b>7<small>/10</small></b><span>Problem &amp; market</span></div>
+                <div><b>4<small>/10</small></b><span>Traction &amp; evidence</span></div>
+                <div><b>8<small>/10</small></b><span>Clarity &amp; delivery</span></div>
+              </div>
+              <div class="bubble"><small>What to fix</small>Lead with retention, not growth rate. Have the cohort numbers ready.</div>
+              <div class="bubble"><small>Prepare for this</small>"Why won't an incumbent ship this in a quarter?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <p class="eyebrow">Features</p>
+            <h2>A sparring partner<br>for pitches and <em>sales calls</em></h2>
+          </div>
+          <p class="sub">Most people rehearse a pitch in front of a mirror or a polite friend. In Hotseat, the investor or buyer across the table is paid to be skeptical.</p>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>Live voice, real interruptions</h3><p>Speech to speech over OpenAI Realtime. The persona answers in its own voice about a second after you finish, lets you pause to think, and stops the moment you cut in.</p></div>
+          <div class="card"><h3>Investors and clients</h3><p>Six fictional personas, from a seed skeptic to a procurement lead, each with a brief, deal-breakers and a difficulty you can change. Paste your deck or key numbers and they'll ask about them.</p></div>
+          <div class="card"><h3>A scorecard when you hang up</h3><p>Six scored areas, what landed, what to fix and the toughest question they'd ask next, plus how you sounded: pace, filler words, share of the talking. See the change since your last call, and export it as Markdown.</p></div>
+          <div class="card"><h3>Yours to run</h3><p>One OpenAI key, which never reaches the browser. Your own password and rate limits, no database. Add a persona with a single JSON file.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="alt">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2>From the brief<br>to the <em>scorecard</em></h2>
+          </div>
+          <p class="sub">A session takes as long as the real call would.</p>
+        </div>
+        <ol class="steps">
+          <li><h3>Pick who's across the table</h3><p>An investor to pitch or a client to win.</p></li>
+          <li><h3>Read the brief</h3><p>What they care about and what will lose them.</p></li>
+          <li><h3>Talk or type</h3><p>Voice and chat share one conversation. Interrupt whenever you like.</p></li>
+          <li><h3>Get scored</h3><p>Hang up for a scorecard across six areas, then download it or go again.</p></li>
+        </ol>
+        <figure class="shot">
+          <img src="assets/screenshot-room.jpg" alt="The Hotseat call room: Dana Ruiz, a skeptical CTO, with the situation brief on the left and the conversation on the right" width="1440" height="900" loading="lazy" decoding="async">
+          <figcaption>The call room. Voice and chat share one conversation.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="self-host">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Self-host</p>
+          <h2>Self-host it<br>with <em>one key</em></h2>
+          <p class="sub">A single Next.js app with no database. Run it anywhere Node runs.</p>
+          <ul class="checks">
+            <li>Needs only <code>OPENAI_API_KEY</code> and <code>ADMIN_PASSWORD</code></li>
+            <li>Chat works with any OpenAI-compatible API; voice uses OpenAI</li>
+            <li>Password gate and per-client rate limits built in</li>
+          </ul>
+          <a class="btn ghost" href="https://github.com/voirlabs/hotseat#quickstart">Read the quickstart</a>
+        </div>
+        <div class="code">
+          <div class="code-bar"><span>Terminal</span><button class="copy" type="button" data-copy="git clone https://github.com/voirlabs/hotseat.git
+cd hotseat
+pnpm install
+cp .env.example .env.local
+pnpm dev">Copy</button></div>
+          <pre><span class="k">git clone</span> https://github.com/voirlabs/hotseat.git
+<span class="k">cd</span> hotseat
+<span class="k">pnpm</span> install
+<span class="k">cp</span> .env.example .env.local  <span class="c"># set OPENAI_API_KEY, ADMIN_PASSWORD</span>
+<span class="k">pnpm</span> dev                    <span class="c"># http://localhost:3000</span></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <p class="credit"><a class="made" href="https://www.voirlabs.io/"><img src="assets/voir-mark.svg" alt="" width="20" height="14" loading="lazy">by Voir Labs</a> · MIT licensed</p>
+        <p class="fine">Personas are fictional. Feedback is generated by AI and isn't investment, sales or legal advice.</p>
+      </div>
+      <nav class="family" aria-label="Project links">
+        <a href="https://github.com/voirlabs/hotseat">GitHub</a>
+        <a href="https://demo.hotseat.voirlabs.io/">Live demo</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll(".copy").forEach((b) => b.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "Copied"; }
+      catch { b.textContent = "Select and copy"; }
+      setTimeout(() => (b.textContent = "Copy"), 1600);
+    }));
+  </script>
+</body>
+</html>

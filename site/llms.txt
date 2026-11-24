@@ -1,0 +1,16 @@
+# Hotseat
+
+> Hotseat is open-source AI pitch practice. You rehearse investor pitches and sales calls out loud against AI personas who push back, then get a scorecard on what landed and what to fix. MIT licensed, self-hosted, by Voir Labs.
+
+## What it does
+
+- Live voice calls: speech to speech over WebRTC (OpenAI Realtime). The persona replies in its own voice about a second after you finish and stops when you interrupt. A text chat shares the same conversation.
+- Six fictional personas in two scenarios. Pitch investors: a seed-stage partner, an operator angel and a growth-equity partner. Win clients: a skeptical CTO, a first-time founder and a procurement lead. Each has a brief, a temperament, topics they push on and deal-breakers.
+- A scorecard when you hang up: an overall score, six scored areas, what landed, what to fix and the toughest question to prepare for. Download the session as Markdown.
+- Self-hosted: a single Next.js app with no database. It needs one OpenAI API key, which never reaches the browser. Private to its owner (one password) with per-client rate limits. A new persona is one JSON file.
+
+## Links
+
+- [Website](https://hotseat.voirlabs.io/)
+- [Source code and quickstart](https://github.com/voirlabs/hotseat)
+- [Voir Labs](https://www.voirlabs.io/): the studio behind Hotseat

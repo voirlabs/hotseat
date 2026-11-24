@@ -1,0 +1,27 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# env (only the example is committed)
+.env*
+!.env.example
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+pnpm-debug.log*
+.vercel
+
+# Firebase local files
+firebase-debug.log
+.firebase/
